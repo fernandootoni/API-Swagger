@@ -1,0 +1,350 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User API",
+    "description": "This is a API for users",
+    "version": "1.0.0",
+    "contact": {
+      "email": "feer.otoni@hotmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["users"],
+        "summary": "Create a new user",
+        "description": "Create a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Fernando Otoni",
+                  "email": "feer.otoni@hotmail.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "Date"
+                    },
+                    "updated_at": {
+                      "type": "Date"
+                    }
+                  },
+                  "example": {
+                    "admin": false,
+                    "id": "1234jlnl-134123j4-a985",
+                    "name": "Fernando Otoni",
+                    "email": "feer.otoni@hotmail.com",
+                    "created_at": "2021-03-10T22:10:32.992Z",
+                    "updated_at": "2021-03-10T22:10:32.992Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email já está sendo utilizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "This email is already taken"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["users"],
+        "summary": "Retorna todos os usuarios.",
+        "description": "Somente o usuario admin pode acessar",
+        "parameters": [{
+          "name": "user_id",
+          "in": " query",
+          "description": "User id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Fernando Otoni",
+                  "email": "feer.otoni@hotmail.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "Date"
+                    },
+                    "updated_at": {
+                      "type": "Date"
+                    }
+                  },
+                  "example": [{
+                    "admin": false,
+                    "id": "1234jlnl-134123j4-a985",
+                    "name": "Fernando Otoni",
+                    "email": "feer.otoni@hotmail.com",
+                    "created_at": "2021-03-10T22:10:32.992Z",
+                    "updated_at": "2021-03-10T22:10:32.992Z"
+                  },
+                  {
+                    "admin": false,
+                    "id": "1234jlnl-134123j4-a985",
+                    "name": "Fernando Otoni",
+                    "email": "feer.otoni@hotmail.com",
+                    "created_at": "2021-03-10T22:10:32.992Z",
+                    "updated_at": "2021-03-10T22:10:32.992Z"
+                  }
+                ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuario sem permissão ou usuario não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "You need to be an administrator to list all users."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": ["users"],
+        "summary": "Retorna todos os usuarios.",
+        "description": "Somente o usuario admin pode acessar",
+        "parameters": [{
+          "name": "user_id",
+          "in": " query",
+          "description": "ID do usuario",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "description": {"exemplo": 123}
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "Date"
+                    },
+                    "updated_at": {
+                      "type": "Date"
+                    }
+                  },
+                  "example": [{
+                    "admin": false,
+                    "id": "1234jlnl-134123j4-a985",
+                    "name": "Fernando Otoni",
+                    "email": "feer.otoni@hotmail.com",
+                    "created_at": "2021-03-10T22:10:32.992Z",
+                    "updated_at": "2021-03-10T22:10:32.992Z"
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuario não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}/admin": {
+      "get": {
+        "tags": ["users"],
+        "summary": "Retorna todos os usuarios.",
+        "description": "Somente o usuario admin pode acessar",
+        "parameters": [{
+          "name": "user_id",
+          "in": " query",
+          "description": "ID do usuario",
+          "required": true,
+          "schema": {
+            "type": "string($uuid)",
+            "description": {"exemplo": 123}
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "Date"
+                    },
+                    "updated_at": {
+                      "type": "Date"
+                    }
+                  },
+                  "example": [{
+                    "admin": false,
+                    "id": "1234jlnl-134123j4-a985",
+                    "name": "Fernando Otoni",
+                    "email": "feer.otoni@hotmail.com",
+                    "created_at": "2021-03-10T22:10:32.992Z",
+                    "updated_at": "2021-03-10T22:10:32.992Z"
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuario não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
